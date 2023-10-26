@@ -25,3 +25,15 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@font-face {
+  font-family: 'VarelaRound-Regular';
+  src: url('../public/fonts/VarelaRound-Regular.ttf') format('woff2'),
+       url('../public/fonts/VarelaRound-Regular.ttf') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.hebrew {
+  font-family: 'VarelaRound-Regular';
+}
