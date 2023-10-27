@@ -14,6 +14,7 @@ import { Footer } from '@/app/components/Footer'
 import QuadrantButton from '@/app/components/Button'
 import { Path } from '@/app/components/Path'
 import { db } from '@/app/data/db'
+import ScrollSearchBar from '@/app/components/ScrollSearchbar'
 
 export default function VersePage({ params }: { params: { query: string } }) {
   let defaultConfig: LetterInfoConfig = {
@@ -49,15 +50,14 @@ let book = db.books.genesis;
         <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
           <Path />
           <div className='hebrew'>
-            <div className='flex flex-row justify-around text-2xl'>
-              <Title value={params.query} />
-              <Title value={'ב ר א ש י ת'} />
+            <div className='flex flex-row justify-around text-4xl'>
+              <Title value={'Genesis - ב ר א ש י ת'} />
             </div>
 
-            <div className='p-4 text-lg'>
+            <div className='p-4 text-2xl'>
               <Body value={hebrewBody} />
             </div>
-            <div className='p-4 text-md'>
+            <div className='p-4 text-2xl'>
               <Body value={hebrewBodyTransliteration} />
             </div>
             <div className='flex justify-center'>
@@ -84,7 +84,24 @@ let book = db.books.genesis;
 
         </div>
       </div>
-      {/* <Footer value={footer} /> */}
+      <div className='pb-6'>
+
+        <Footer word={{
+          index: 0,
+          sound: '',
+          word: footer,
+          currentOccurenceCount: 0,
+          totalOccurenceCount: 0,
+          numericalValue: 0,
+          altValue: 0,
+          romanCharacter: '',
+          names: '',
+          emoji: '',
+          language: ''
+        }} />
+      </div>
+      <ScrollSearchBar/>
+
     </main>
   )
 }

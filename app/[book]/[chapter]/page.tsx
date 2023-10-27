@@ -11,6 +11,7 @@ import { Body } from '@/app/components/Body'
 import { Footer } from '@/app/components/Footer'
 import { db } from '@/app/data/db'
 import { Path } from '@/app/components/Path'
+import ScrollSearchBar from '@/app/components/ScrollSearchbar'
 
 
 export default function ChapterPage({ params }: { params: { book: string } }) {
@@ -90,19 +91,24 @@ export default function ChapterPage({ params }: { params: { book: string } }) {
 
         </div>
       </div>
-      <Footer word={{
-        index: 0,
-        sound: '',
-        word: footer,
-        currentOccurenceCount: 0,
-        totalOccurenceCount: 0,
-        numericalValue: 0,
-        altValue: 0,
-        romanCharacter: '',
-        names: '',
-        emoji: '',
-        language: ''
-      }} />
+      <div className='pb-6'>
+
+        <Footer word={{
+          index: 0,
+          sound: '',
+          word: footer,
+          currentOccurenceCount: 0,
+          totalOccurenceCount: 0,
+          numericalValue: 0,
+          altValue: 0,
+          romanCharacter: '',
+          names: '',
+          emoji: '',
+          language: ''
+        }} />
+      </div>
+      <ScrollSearchBar/>
+
     </main>
   )
 }

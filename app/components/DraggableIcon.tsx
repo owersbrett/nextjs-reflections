@@ -49,7 +49,7 @@ const DraggableIcon: React.FC = () => {
 
   return (
     <div
-    className='z-50 p-8 bg-white text-black text-xl rounded-3xl'
+    className='z-50 p-8 bg-white text-black text-xl rounded-3xl hidden'
 
       ref={dragRef}
       onMouseDown={handleMouseDown}

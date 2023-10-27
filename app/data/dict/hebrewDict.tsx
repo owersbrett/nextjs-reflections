@@ -1,16 +1,28 @@
 import { Letter } from "../types/Letter";
 
 const hebrewDict = new Map<string, Letter>();
-hebrewDict.set("0", {
-  index: 404,
-  sound: "Tohu vaVohu",
-  letter: "תהו ובהו",
-  numericalValue: 404,
-  altValue: 404,
-  romanCharacter: "404",
-  names: "404",
+// hebrewDict.set("0", {
+//   index: 404,
+//   sound: "Tohu vaVohu",
+//   letter: "תהו ובהו",
+//   numericalValue: 404,
+//   altValue: 404,
+//   romanCharacter: "404",
+//   names: "404",
+//   final: "",
+//   emoji: "",
+//   language: "Hebrew"
+// });
+hebrewDict.set("1", {
+  index: 1,
+  sound: "silent",
+  letter: "א",
+  numericalValue: 1,
+  altValue: 1000,
+  romanCharacter: "A",
+  names: "Aleph",
   final: "",
-  emoji: "",
+  emoji: "א",
   language: "Hebrew"
 });
 hebrewDict.set("ב", {

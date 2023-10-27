@@ -15,6 +15,7 @@ import QuadrantButton from '../components/Button'
 import { Path } from '../components/Path'
 import { db } from '../data/db';
 import bereshitDict from '../data/dict/bereshitDict';
+import ScrollSearchBar from '../components/ScrollSearchbar'
 
 export default function BookPage({ params }: { params: { book: string } }) {
   let defaultConfig: LetterInfoConfig = {
@@ -93,19 +94,23 @@ export default function BookPage({ params }: { params: { book: string } }) {
 
         </div>
       </div>
-      <Footer word={{
-        index: 0,
-        sound: '',
-        word: footer,
-        currentOccurenceCount: 0,
-        totalOccurenceCount: 0,
-        numericalValue: 0,
-        altValue: 0,
-        romanCharacter: '',
-        names: '',
-        emoji: '',
-        language: ''
-      }} />
+      <div className='pb-6'>
+
+        <Footer word={{
+          index: 0,
+          sound: '',
+          word: footer,
+          currentOccurenceCount: 0,
+          totalOccurenceCount: 0,
+          numericalValue: 0,
+          altValue: 0,
+          romanCharacter: '',
+          names: '',
+          emoji: '',
+          language: ''
+        }} />
+      </div>
+      <ScrollSearchBar/>
     </main>
   )
 }
