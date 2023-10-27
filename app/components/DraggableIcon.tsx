@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaSearch } from 'react-icons/fa';
 
 const DraggableIcon: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -62,7 +61,7 @@ const DraggableIcon: React.FC = () => {
         cursor: 'grab',
       }}
     >
-<FaSearch />
+      Click
     </div>
   );
 };
