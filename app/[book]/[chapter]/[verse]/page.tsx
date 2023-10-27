@@ -3,17 +3,19 @@
 import Image from 'next/image'
 import { Header } from "@/app/components/Header"
 import { Title } from '@/app/components/Title'
-import { LetterInfo } from '@/app/components/custom/LetterInfo'
-import { Size } from '@/app/data/types/Size'
+import { LetterInfo, LetterInfoConfig } from '@/app/components/custom/LetterInfo'
+import { Size } from '@/app/data/enums/Size'
 
 import { Letter } from '@/app/data/types/Letter'
-import { hebrew } from '@/app/data/hebrew'
-import { LetterInfoConfig } from '../../app/components/custom/LetterInfo';
+
 import { useState } from 'react'
 import { Body } from '@/app/components/Body'
 import { Footer } from '@/app/components/Footer'
+import QuadrantButton from '@/app/components/Button'
+import { Path } from '@/app/components/Path'
+import { db } from '@/app/data/db'
 
-export const LessPage: React.FC = () => {
+export default function VersePage({ params }: { params: { query: string } }) {
   let defaultConfig: LetterInfoConfig = {
     size: Size.large,
     showIndex: true,
@@ -24,6 +26,9 @@ export const LessPage: React.FC = () => {
     showName: true,
     showEmoji: true
   }
+let book = db.books.genesis;
+
+  
   const [titleConfig, setTitleConfig] = useState(defaultConfig)
   let bereshit = ["ב", "ר", "א", "ש", "י", "ת"]
   let footer = "\"In The Beginning, God Created the heaven and the earth.\" - Genesis 1.1"
@@ -31,19 +36,21 @@ export const LessPage: React.FC = () => {
   let hebrewBodyTransliteration = "Bereshit bara elohim et hashamayim va'et ha'aretz"
 
   let table = bereshit.map((item, index) => {
-    let letter = hebrew.find((value) => value.letter == item);
-    if (letter == undefined) letter = hebrew[0] as Letter;
-    return (<LetterInfo config={titleConfig} letter={letter} key={index} />)
+    let letter = db.alphabets.hebrew.get(item);
+    if (letter == undefined) letter = db.alphabets.hebrew.get("0") as Letter;
+    return (<LetterInfo config={titleConfig} letter={letter} key={index} onHover={function (item: Letter): Letter {
+      throw new Error('Function not implemented.')
+    }} />)
   });
 
   return (
     <main >
       <div className="flex min-h-screen flex-col items-center justify-between ">
         <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-          <Header value={'Reflections'} />
+          <Path />
           <div className='hebrew'>
             <div className='flex flex-row justify-around text-2xl'>
-              <Title value={'Bereshit'} />
+              <Title value={params.query} />
               <Title value={'ב ר א ש י ת'} />
             </div>
 
@@ -77,7 +84,7 @@ export const LessPage: React.FC = () => {
 
         </div>
       </div>
-      <Footer value={footer} />
+      {/* <Footer value={footer} /> */}
     </main>
   )
 }

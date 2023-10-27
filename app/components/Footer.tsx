@@ -1,21 +1,26 @@
 import React from 'react';
-import { TextProps } from '../data/types/TextProps';
+import { TextProps } from '../data/props/TextProps';
 import { Body } from './Body';
 import Link from 'next/link';
+import { LetterInfoProps } from './custom/LetterInfo';
+import { Word } from '../data/types/Word';
 
+interface FooterProps {
+    word: Word;
+}
 
-
-export const Footer: React.FC<TextProps> = ({ value }) => {
+export const Footer: React.FC<FooterProps> = ({ word }) => {
     return (
         <div className='p-8'>
-            <Body value={value} />
             <div className='flex justify-evenly'>
-                <Link href="/home/LessPage">
+                <Body value={word.word} />
+                {/* <Link href="/genesis/">
                     {"<"}
                 </Link>
-                <Link href="/home/MorePage">
+                    <Body value={letter.letter} />
+                <Link href="/genesis/1">
                     {">"}
-                </Link>
+                </Link> */}
             </div>
         </div>
     );

@@ -1,20 +1,20 @@
 "use client"
 
 import { Header } from "@/app/components/Header"
-import { Title } from '@/app/components/Title'
 import { LetterInfo } from '@/app/components/custom/LetterInfo'
-import { Size } from '@/app/data/types/Size'
+import { Size } from '@/app/data/enums/Size'
 
 import { Letter } from '@/app/data/types/Letter'
-import { hebrew } from '@/app/data/hebrew'
 import { LetterInfoConfig } from '../components/custom/LetterInfo';
 import { useState } from 'react'
-import { Body } from '@/app/components/Body'
 import { Footer } from '@/app/components/Footer'
+import ScrollSearchBar from "../components/ScrollSearchbar"
+import DraggableIcon from "../components/DraggableIcon"
+import { db } from "../data/db"
 
 export default function HomePage() {
   let defaultConfig: LetterInfoConfig = {
-    size: Size.large,
+    size: Size.small,
     showIndex: true,
     showSound: true,
     showValue: true,
@@ -24,35 +24,33 @@ export default function HomePage() {
     showEmoji: true
   }
   const [titleConfig, setTitleConfig] = useState(defaultConfig)
-  let bereshit = ["ב", "ר", "א", "ש", "י", "ת"]
+  let alephBet = Array.from(db.alphabets.hebrew.values());
   let footer = "\"In The Beginning, God Created the heaven and the earth.\" - Genesis 1.1"
   let hebrewBody = "בּראשית בּרא אַלהים את השמים ואת הארץ"
   let hebrewBodyTransliteration = "Bereshit bara elohim et hashamayim va'et ha'aretz"
 
-  let table = bereshit.map((item, index) => {
-    let letter = hebrew.find((value) => value.letter == item);
-    if (letter == undefined) letter = hebrew[0] as Letter;
-    return (<LetterInfo config={titleConfig} letter={letter} key={index} />)
+  let table = alephBet.map((item, index) => {
+    let letter = item;
+    return (<LetterInfo config={titleConfig} letter={letter} key={index} onHover={(letter: Letter) => {
+      return letter;
+    }} />)
   });
 
   return (
     <main >
+      <ScrollSearchBar />
+      <DraggableIcon />
       <div className="flex min-h-screen flex-col items-center justify-between ">
         <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
           <Header value={'Reflections'} />
           <div className='hebrew'>
             <div className='flex flex-row justify-around text-2xl'>
-              <Title value={'Bereshit'} />
-              <Title value={'ב ר א ש י ת'} />
+
+
             </div>
 
-            <div className='p-4 text-lg'>
-              <Body value={hebrewBody} />
-            </div>
-            <div className='p-4 text-md'>
-              <Body value={hebrewBodyTransliteration} />
-            </div>
-            <div className='flex justify-center'>
+
+            <div className='flex justify-center pb-16'>
               <div>
                 <table className='text-3xl justify-center'>
                   <thead>
@@ -76,7 +74,7 @@ export default function HomePage() {
 
         </div>
       </div>
-      <Footer value={footer} />
+  
     </main>
   )
 }

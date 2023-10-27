@@ -37,3 +37,7 @@ body {
 .hebrew {
   font-family: 'VarelaRound-Regular';
 }
+
+.hidden {
+  visibility: hidden;
+}
