@@ -52,10 +52,10 @@ export default function ChapterPage({ params }: { params: { book: string } }) {
             </div>
             <div className='flex flex-col'>
               <div className=''>
-                {bereshit.verses.map((verse) => {
+                {bereshit.verses.map((verse, index) => {
                   return (
-
-                    <div className='p-4 text-lg ' id={verse}>
+ 
+                    <div className='p-4 text-lg ' key={"id:" + index}>
                       <Body value={verse} />
                     </div>
 
