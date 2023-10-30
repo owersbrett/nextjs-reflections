@@ -1,3 +1,6 @@
+import { Note } from "./Note";
+import { Word } from "./Word";
+
 export type Letter = {
     index: number;
     sound: string;
@@ -6,7 +9,9 @@ export type Letter = {
     numericalValue: number;
     altValue: number;
     romanCharacter: string;
-    names: string;
     emoji: string;
     language: string;
+    notes: Note[];
+    word: string;
+
 }

@@ -4,11 +4,11 @@ export type Word = {
     word: string;
     currentOccurenceCount: number;
     totalOccurenceCount: number;
-
+    meanings: string[];
     numericalValue: number;
     altValue: number;
     romanCharacter: string;
-    names: string;
     emoji: string;
     language: string;
+    englishWord: string;
 }

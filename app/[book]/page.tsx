@@ -3,22 +3,18 @@
 import Image from 'next/image'
 import { Header } from "@/app/components/Header"
 import { Title } from '@/app/components/Title'
-import { LetterInfo, LetterInfoConfig } from '@/app/components/custom/LetterInfo'
 import { Size } from '@/app/data/enums/Size'
 
 import { Letter } from '@/app/data/types/Letter'
 
 import { useState } from 'react'
 import { Body } from '@/app/components/Body'
-import { Footer } from '@/app/components/Footer'
-import QuadrantButton from '../components/Button'
 import { Path } from '../components/Path'
 import { db } from '../data/db';
-import bereshitDict from '../data/dict/bereshitDict';
-import ScrollSearchBar from '../components/ScrollSearchbar'
+import { LetterRow, LetterRowConfig } from '../components/LetterInfo'
 
 export default function BookPage({ params }: { params: { book: string } }) {
-  let defaultConfig: LetterInfoConfig = {
+  let defaultConfig: LetterRowConfig = {
     size: Size.large,
     showIndex: true,
     showSound: true,
@@ -32,36 +28,45 @@ export default function BookPage({ params }: { params: { book: string } }) {
 
   let bereshit = db.books.genesis;
   let title = bereshit.title;
-  let footer = bereshit.common;
   let mainBody = bereshit.text;
   let transliteration = bereshit.transliteration;
 
   let table = Array.from(title).map((item, index) => {
     let letter = db.alphabets.hebrew.get(item);
     if (letter == undefined) letter = db.alphabets.hebrew.get("0")!;
+    let word = db.words.hebrew.get(letter.word) ?? db.words.hebrew.get("0")!;
 
-    return (<LetterInfo config={titleConfig} letter={letter} key={index} onHover={function (item: Letter): Letter {
+    return (<LetterRow config={titleConfig} letter={letter} key={index} onHover={function (item: Letter): Letter {
       throw new Error('Function not implemented.')
-    }} />)
+    }} word={word} />)
   });
 
   return (
     <main>
       <div className="flex min-h-screen flex-col items-center justify-between ">
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-          <Path />
+        <div className="z-10 w-full items-center font-mono text-sm lg:flex">
+
           <div className='hebrew'>
-            <div className='flex flex-row justify-end text-2xl'>
-              <Title value={title} />
-            </div>
+
             <div className='flex flex-col'>
               <div className=''>
                 {bereshit.verses.map((verse, index) => {
                   return (
+                    <>
+                      <div
+                        className='flex flex-row justify-between'>
+                        <div className='p-4 text-lg ' key={"id2:" + index}>
+                          <Body value={bereshit.transliteratedVerses[index]} />
+                        </div>
+                        <div className='p-4 text-lg' key={"id1:" + index}>
+                          <Body value={bereshit.englishVerses[index]} />
+                        </div>
+                        <div className='p-4 text-lg' key={"id:" + index}>
+                          <Body value={verse} />
+                        </div>
+                      </div>
 
-                    <div className='p-4 text-lg ' key={"id:" + index}>
-                      <Body value={verse} />
-                    </div>
+                    </>
 
                   );
                 })}
@@ -94,23 +99,7 @@ export default function BookPage({ params }: { params: { book: string } }) {
 
         </div>
       </div>
-      <div className='pb-6'>
 
-        <Footer word={{
-          index: 0,
-          sound: '',
-          word: footer,
-          currentOccurenceCount: 0,
-          totalOccurenceCount: 0,
-          numericalValue: 0,
-          altValue: 0,
-          romanCharacter: '',
-          names: '',
-          emoji: '',
-          language: ''
-        }} />
-      </div>
-      <ScrollSearchBar/>
     </main>
   )
 }

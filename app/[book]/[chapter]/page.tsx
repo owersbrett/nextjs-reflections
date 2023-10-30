@@ -1,17 +1,15 @@
 "use client"
 
 import { Title } from '@/app/components/Title'
-import { LetterInfo, LetterInfoConfig } from '@/app/components/custom/LetterInfo'
+import { LetterInfo, LetterInfoConfig } from '@/app/components/LetterInfo'
 import { Size } from '@/app/data/enums/Size'
 
 import { Letter } from '@/app/data/types/Letter'
 
 import { useState } from 'react'
 import { Body } from '@/app/components/Body'
-import { Footer } from '@/app/components/Footer'
 import { db } from '@/app/data/db'
 import { Path } from '@/app/components/Path'
-import ScrollSearchBar from '@/app/components/ScrollSearchbar'
 
 
 export default function ChapterPage({ params }: { params: { book: string } }) {
@@ -29,7 +27,6 @@ export default function ChapterPage({ params }: { params: { book: string } }) {
 
   let bereshit = db.books.genesis;
   let title = bereshit.title;
-  let footer = bereshit.common;
   let mainBody = bereshit.text;
   let transliteration = bereshit.transliteration;
 
@@ -91,23 +88,7 @@ export default function ChapterPage({ params }: { params: { book: string } }) {
 
         </div>
       </div>
-      <div className='pb-6'>
-
-        <Footer word={{
-          index: 0,
-          sound: '',
-          word: footer,
-          currentOccurenceCount: 0,
-          totalOccurenceCount: 0,
-          numericalValue: 0,
-          altValue: 0,
-          romanCharacter: '',
-          names: '',
-          emoji: '',
-          language: ''
-        }} />
-      </div>
-      <ScrollSearchBar/>
+     
 
     </main>
   )

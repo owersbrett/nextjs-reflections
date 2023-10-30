@@ -3,18 +3,15 @@
 import Image from 'next/image'
 import { Header } from "@/app/components/Header"
 import { Title } from '@/app/components/Title'
-import { LetterInfo, LetterInfoConfig } from '@/app/components/custom/LetterInfo'
+import { LetterInfo, LetterInfoConfig } from '@/app/components/LetterInfo'
 import { Size } from '@/app/data/enums/Size'
 
 import { Letter } from '@/app/data/types/Letter'
 
 import { useState } from 'react'
 import { Body } from '@/app/components/Body'
-import { Footer } from '@/app/components/Footer'
-import QuadrantButton from '@/app/components/Button'
 import { Path } from '@/app/components/Path'
 import { db } from '@/app/data/db'
-import ScrollSearchBar from '@/app/components/ScrollSearchbar'
 
 export default function VersePage({ params }: { params: { query: string } }) {
   let defaultConfig: LetterInfoConfig = {
@@ -32,7 +29,6 @@ let book = db.books.genesis;
   
   const [titleConfig, setTitleConfig] = useState(defaultConfig)
   let bereshit = ["ב", "ר", "א", "ש", "י", "ת"]
-  let footer = "\"In The Beginning, God Created the heaven and the earth.\" - Genesis 1.1"
   let hebrewBody = "בּראשית בּרא אַלהים את השמים ואת הארץ"
   let hebrewBodyTransliteration = "Bereshit bara elohim et hashamayim va'et ha'aretz"
 
@@ -84,24 +80,7 @@ let book = db.books.genesis;
 
         </div>
       </div>
-      <div className='pb-6'>
-
-        <Footer word={{
-          index: 0,
-          sound: '',
-          word: footer,
-          currentOccurenceCount: 0,
-          totalOccurenceCount: 0,
-          numericalValue: 0,
-          altValue: 0,
-          romanCharacter: '',
-          names: '',
-          emoji: '',
-          language: ''
-        }} />
-      </div>
-      <ScrollSearchBar/>
-
+   
     </main>
   )
 }

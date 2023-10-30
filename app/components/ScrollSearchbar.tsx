@@ -1,3 +1,4 @@
+import router, { Router, useRouter } from 'next/router';
 import React, { useState, useEffect, useRef } from 'react';
 
 const ScrollSearchBar: React.FC = () => {
@@ -14,7 +15,6 @@ const ScrollSearchBar: React.FC = () => {
       setShowSearchBar(false);
     }
   };
-
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -32,7 +32,6 @@ const ScrollSearchBar: React.FC = () => {
               if (inputRef.current) {
                 inputRef.current.blur();
               }
-              if (window.location.pathname != text) window.location.pathname = text;
               
             }}
             >
@@ -43,12 +42,11 @@ const ScrollSearchBar: React.FC = () => {
                 setText(e.target.value);
               }}
               className="w-full p-2 rounded-3xl search-box"
-              placeholder="//"
+              placeholder="$arg1 $arg2..."
             />
           </form>
         </div>
       )}
-      {/* Your other content here */}
     </div>
   );
 };
